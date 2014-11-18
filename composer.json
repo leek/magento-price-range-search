@@ -1,5 +1,6 @@
 {
     "name": "leek/magento-price-range-search",
+    "description": "Example module illustrating searching for products by a price range.",
     "license": "MIT",
     "authors": [
         {
