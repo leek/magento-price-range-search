@@ -42,7 +42,7 @@
 <div class="category-products">
     <?php echo $this->getToolbarHtml() ?>
     <?php // List mode ?>
-    <?php if(true || $this->getMode()!='grid'): ?>
+    <?php if($this->getMode()!='grid'): ?>
     <?php $_iterator = 0; ?>
     <ol class="products-list" id="products-list">
     <?php foreach ($_productCollection as $_product): ?>
