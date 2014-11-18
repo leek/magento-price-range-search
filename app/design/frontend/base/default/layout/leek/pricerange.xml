@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<layout>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink">
+                <name>leek_pricerange</name>
+                <path>pricerange/customer</path>
+                <label>Price Range Search</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <leek_pricerange_customer_index>
+        <update handle="customer_account" />
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/leek/pricerange/jquery.nouislider.min.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/leek/pricerange/jquery.nouislider.pips.min.css</name></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="leek_pricerange/form" name="leek_pricerange_form" template="leek/pricerange/form.phtml"/>
+            <block type="leek_pricerange/result" name="leek_pricerange_result" template="leek/pricerange/result.phtml">
+                <block type="catalog/product_list" name="search_result_list" template="leek/pricerange/product/list.phtml">
+                    <block type="core/text_list" name="product_list.name.after" as="name.after" />
+                    <block type="core/text_list" name="product_list.after" as="after" />
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="leek/pricerange/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <action method="addPagerLimit" translate="label">
+                            <mode>grid</mode>
+                            <limit>10</limit>
+                            <label>10</label>
+                        </action>
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                    <action method="setColumnCount"><columns>5</columns></action>
+                </block>
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/>
+            </block>
+        </reference>
+    </leek_pricerange_customer_index>
+
+</layout>

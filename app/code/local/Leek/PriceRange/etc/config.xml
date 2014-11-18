@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Leek_PriceRange>
+            <version>1.0.0</version>
+        </Leek_PriceRange>
+    </modules>
+    <global>
+        <blocks>
+            <leek_pricerange>
+                <class>Leek_PriceRange_Block</class>
+            </leek_pricerange>
+        </blocks>
+        <helpers>
+            <leek_pricerange>
+                <class>Leek_PriceRange_Helper</class>
+            </leek_pricerange>
+        </helpers>
+        <models>
+            <leek_pricerange>
+                <class>Leek_PriceRange_Model</class>
+            </leek_pricerange>
+        </models>
+    </global>
+    <frontend>
+        <routers>
+            <leek_pricerange>
+                <use>standard</use>
+                <args>
+                    <module>Leek_PriceRange</module>
+                    <frontName>pricerange</frontName>
+                </args>
+            </leek_pricerange>
+        </routers>
+        <layout>
+            <updates>
+                <leek_pricerange module="Leek_PriceRange">
+                    <file>leek/pricerange.xml</file>
+                </leek_pricerange>
+            </updates>
+        </layout>
+        <secure_url>
+            <leek_pricerange>/pricerange/</leek_pricerange>
+        </secure_url>
+    </frontend>
+</config>

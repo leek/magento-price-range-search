@@ -1,0 +1,6 @@
+app/code/local/Leek/PriceRange
+app/design/frontend/base/default/layout/leek/pricerange
+app/design/frontend/base/default/template/leek/pricerange
+app/etc/modules/Leek_PriceRange.xml
+skin/frontend/base/default/css/leek/pricerange
+skin/frontend/base/default/js/leek/pricerange

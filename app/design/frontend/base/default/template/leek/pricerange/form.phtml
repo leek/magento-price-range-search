@@ -1,0 +1,83 @@
+<?php
+/**
+ * Catalog advanced search form
+ *
+ * @see Leek_PriceRange_Block_Form
+ */
+?>
+<?php $maxQueryLength= $this->helper('catalogsearch')->getMaxQueryLength();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<form action="<?php echo $this->getSearchPostUrl() ?>" method="get" id="form-validate">
+    <div class="fieldset advanced-search">
+        <ul class="form-list" id="advanced-search-list">
+            <?php foreach ($this->getSearchableAttributes() as $_attribute): ?>
+            <?php $_code = $_attribute->getAttributeCode() ?>
+            <li>
+                <label for="<?php echo $_code ?>"><?php echo $this->getAttributeLabel($_attribute) ?></label>
+                <?php switch($this->getAttributeInputType($_attribute)):
+                    case 'price': ?>
+                        <div class="input-range">
+                            <input name="<?php echo $_code ?>[from]" value="<?php echo $this->escapeHtml($this->getAttributeValue($_attribute, 'from')) ?>" id="<?php echo $_code ?>" title="<?php echo $this->escapeHtml($this->getAttributeLabel($_attribute)) ?>"  class="input-text validate-number" type="text" pattern="\d*" maxlength="<?php echo $maxQueryLength;?>" />
+                            <span class="separator">-</span>
+                            <input name="<?php echo $_code ?>[to]" value="<?php echo $this->escapeHtml($this->getAttributeValue($_attribute, 'to')) ?>" id="<?php echo $_code ?>_to" title="<?php echo $this->escapeHtml($this->getAttributeLabel($_attribute)) ?>"  class="input-text validate-number" type="text" pattern="\d*" maxlength="<?php echo $maxQueryLength;?>" />
+                            <small>(<?php echo $this->getCurrency($_attribute); ?>)</small>
+                        </div>
+                        <div id="rangeSlider" style="margin-top:1em"></div>
+                    <?php break; ?>
+                <?php endswitch; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+        <script type="text/javascript">decorateList('advanced-search-list')</script>
+    </div>
+    <div class="buttons-set">
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button"><span><span><?php echo $this->__('Search') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<scr'+'ipt src="<?php echo $this->getSkinUrl('js/leek/pricerange/jquery-1.11.1.min.js'); ?>"><\/sc'+'ript>')</script>
+<script>jQuery.noConflict()</script>
+<script src="<?php echo $this->getSkinUrl('js/leek/pricerange/jquery.nouislider.all.min.js'); ?>"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    var $range = $("#rangeSlider");
+
+    // Initialize
+    $range.noUiSlider({
+    	start: [ $("#price").val(), $("#price_to").val() ],
+        margin: 1,
+        behaviour: 'drag',
+        connect: true,
+    	range: { 'min': 0, 'max': 1000 },
+    	format: wNumb({ decimals: 0 })
+    });
+
+    // Set Rules
+    $range.on('change', function(){
+        var data = $(this).val(), from = data[0], to = data[1];
+        // Keep max range within 5x of min
+        if (from > 0 && to > (from * 5)) {
+            $(this).val([null, (from * 5)]);
+        }
+    });
+
+    // Link with Input(s)
+    $range.Link('lower').to($("#price"), null, wNumb({ decimals: 0 }));
+    $range.Link('upper').to($("#price_to"), null, wNumb({ decimals: 0 }));
+
+    $("#price").on("change", function() {
+        $range.val([$(this).val(), null]).trigger("change");
+    });
+
+    $("#price_to").on("change", function() {
+        $range.val([null, $(this).val()]).trigger("change");
+    });
+});
+</script>

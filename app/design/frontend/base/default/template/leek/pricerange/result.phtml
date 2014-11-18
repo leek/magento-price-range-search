@@ -1,0 +1,11 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php if (!$this->getResultCount()): ?>
+    <p class="error-msg"><?php echo $this->helper('catalogsearch')->__('No items were found using the above search criteria.');?></p>
+<?php endif; ?>
+
+<?php if ($this->getResultCount()): ?>
+    <?php echo $this->getProductListHtml() ?>
+<?php endif; ?>
+
+<?php $this->getSearchCriterias(); ?>

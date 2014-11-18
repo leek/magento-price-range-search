@@ -1,0 +1,13 @@
+{
+    "name": "leek/magento-price-range-search",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Jones",
+            "email": "leeked@gmail.com"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
