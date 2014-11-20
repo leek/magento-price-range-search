@@ -2,7 +2,7 @@
 
 - [x] New customer account section
 - [x] Return product results by price range
-- [ ] Show product results in HTML table
+- [x] Show product results in HTML table
 - [x] **Optional** Use JavaScript range/slider
 - [ ] **Optional** Load results via AJAX
 - [x] Installable as standalone module
